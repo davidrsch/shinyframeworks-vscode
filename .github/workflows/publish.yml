@@ -1,0 +1,78 @@
+on:
+  push:
+    tags:
+      - "v[0-9]*"
+    branches:
+      - "main"
+  pull_request:
+    branches:
+      - "main"
+
+name: Deploy Extension
+jobs:
+  build-vsix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18.x"
+
+      - run: yarn install --immutable --immutable-cache --check-cache
+
+      - name: Lint Extension
+        run: yarn lint
+
+      - name: Build Extension
+        run: yarn vsix
+
+      - name: Upload extension to Actions Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: shiny-vscode
+          path: "shinyframeworks*.vsix"
+
+  publish-open-vsx:
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'push' &&
+      github.ref_type == 'tag' &&
+      github.repository_owner == 'davidrsch'
+    needs:
+      - build-vsix
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18.x"
+
+      - run: yarn install --immutable --immutable-cache --check-cache
+
+      - name: Publish to Open VSX Registry
+        uses: HaaLeo/publish-vscode-extension@v1
+        with:
+          pat: ${{ secrets.OPEN_VSX_TOKEN }}
+          skipDuplicate: true
+
+  publish-vscode-marketplace:
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'push' &&
+      github.ref_type == 'tag' &&
+      github.repository_owner == 'davidrsch'
+    needs:
+      - build-vsix
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18.x"
+
+      - run: yarn install --immutable --immutable-cache --check-cache
+
+      - name: Publish to Visual Studio Marketplace
+        uses: HaaLeo/publish-vscode-extension@v1
+        with:
+          pat: ${{ secrets.VSCE_PAT }}
+          skipDuplicate: true
+          registryUrl: https://marketplace.visualstudio.com
