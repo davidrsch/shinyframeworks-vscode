@@ -52,7 +52,7 @@ jobs:
         uses: HaaLeo/publish-vscode-extension@v1
         with:
           pat: ${{ secrets.OPEN_VSX_TOKEN }}
-          skipDuplicate: true
+          skipDuplicate: false
 
   publish-vscode-marketplace:
     runs-on: ubuntu-latest
@@ -74,5 +74,5 @@ jobs:
         uses: HaaLeo/publish-vscode-extension@v1
         with:
           pat: ${{ secrets.VSCE_PAT }}
-          skipDuplicate: true
+          skipDuplicate: false
           registryUrl: https://marketplace.visualstudio.com
