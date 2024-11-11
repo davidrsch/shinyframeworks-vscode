@@ -98,7 +98,8 @@
     "pretest": "yarn run compile-tests && yarn run compile && yarn run lint",
     "check-types": "tsc --noEmit",
     "lint": "eslint src",
-    "test": "vscode-test"
+    "test": "vscode-test",
+    "vsix": "npx @vscode/vsce package"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.9",
