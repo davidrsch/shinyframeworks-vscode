@@ -1,0 +1,84 @@
+{
+    "name": "rhino",
+    "language": "R",
+    "app": {
+        "code": [
+            "'rhino::init(path)'"
+        ]
+    },
+    "module": {
+        "code": null,
+        "file": {
+            "filename": "module.R",
+            "content": [
+                "box::use(",
+                "  shiny[moduleServer, NS],",
+                ")",
+                "",
+                "#' @export",
+                "ui <- function(id) {",
+                "  ns <- NS(id)",
+                "",
+                "}",
+                "",
+                "#' @export",
+                "server <- function(id) {",
+                "  moduleServer(id, function(input, output, session) {",
+                "",
+                "  })",
+                "}",
+                ""
+            ]
+        }
+    },
+    "addins": [
+        {
+            "name": "Lint R Code",
+            "code": [
+                "'rhino::lint_r()'"
+            ],
+            "directory": "root"
+        },
+        {
+            "name": "Lint JavaScript",
+            "code": [
+                "'rhino::lint_js(fix = FALSE)'"
+            ],
+            "directory": "root"
+        },
+        {
+            "name": "Lint sass",
+            "code": [
+                "'rhino::lint_sass(fix = FALSE)'"
+            ],
+            "directory": "root"
+        },
+        {
+            "name": "Run R unit tests",
+            "code": [
+                "'rhino::test_r()'"
+            ],
+            "directory": "root"
+        },
+        {
+            "name": "Run Cypress end-to-end tests",
+            "code": [
+                "'rhino::test_e2e(interactive = FALSE)'"
+            ]
+        },
+        {
+            "name": "Build JavaScript",
+            "code": [
+                "'rhino::build_js(watch = FALSE)'"
+            ],
+            "directory": "root"
+        },
+        {
+            "name": "Build Sass",
+            "code": [
+                "'rhino::build_sass(watch = FALSE)'"
+            ],
+            "directory": "root"
+        }
+    ]
+}
