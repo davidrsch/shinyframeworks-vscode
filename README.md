@@ -30,6 +30,10 @@ Calling out known issues can help limit users opening duplicate issues against y
 
 ## Release Notes
 
+### 0.0.2
+
+Fixing some bugs detected in initial release
+
 ### 0.0.1
 
 Initial release of shinyframeworks
