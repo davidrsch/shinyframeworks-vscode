@@ -1,71 +1,37 @@
-# shinyframeworks-vscode README
+# Shinyframeworks - VS Code Extension
 
-This is the README for your extension "shinyframeworks". After writing up a brief description, we recommend including the following sections.
+Shiny Frameworks is an extension designed to enhance your development workflow with [Shiny](https://shiny.posit.co), providing streamlined tools to simplify common tasks across a variety of Shiny frameworks. Currentlt suported frameworks are:
+* R:
+    1. shiny
+    2. rhino
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+* Select Framework: Quickly choose from a list of supported Shiny frameworks to tailor your workflow to the specific tools and features of your project.
+* Create App: Instantly generate a new app structure based on the selected framework, making it easier to start building your Shiny application without worrying about setup.
+* Create Module: Effortlessly create modular components within your Shiny app, using the best practices and conventions of your chosen framework.
+* Run Addins: Seamlessly access and execute addins specific to the selected framework, directly from VS Code, to streamline your development process.
 
-For example if there is an image subfolder under your extension project workspace:
+<!--## Requirements
 
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+If you have any requirements or dependencies, add a section describing those and how to install and configure them.-->
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
 This extension contributes the following settings:
+* `shinyframeworks.framework.defaultLanguage`:
+This setting determines the default programming language (e.g., R or Python) to be used for your Shiny framework-based projects within the workspace. When you select a framework using the Select Framework command, this setting is automatically updated to reflect the language associated with the chosen framework. This ensures that any new apps or modules you create are set up with the appropriate language without needing manual configuration.
+* `shinyframeworks.framework.defaultFramework`:
+This setting defines the default Shiny framework to be used in the current workspace. When you use the Select Framework command to choose a framework, this setting is automatically updated to reflect the selected framework. This ensures that new apps, modules, and related addins are tailored to the specific framework, streamlining your development process.
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+<!-- ## Known Issues
 
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
+Calling out known issues can help limit users opening duplicate issues against your extension.-->
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
+### 0.0.1
 
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+Initial release of shinyframeworks
 
 ---
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
