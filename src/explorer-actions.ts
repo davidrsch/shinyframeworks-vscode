@@ -140,15 +140,17 @@ async function prepareCommandWithRelativePath(
     // Compute the relative path from the workspace root to the selected file or folder
     const selectedPath = uri.fsPath;
     let relativePath = path.relative(workspaceRoot, selectedPath);
-
+    if (!relativePath) {
+        relativePath = '.';
+    }
     // Replace backslashes with forward slashes for cross-platform compatibility
     relativePath = relativePath.replace(/\\/g, '/');
 
-    // Join the command lines into a single string
+    // Join the command lines into a single string, replacing 'path' with the relative path
     const command = commandLines.map((line: string) => line.replace('path', `\\"${relativePath}\\"`)).join('');
 
-    // Set the target path to the selected path's directory
-    const targetPath = path.dirname(selectedPath);
+    // Set the target path to the workspace root directory
+    const targetPath = workspaceRoot;
 
     return { command, targetPath };
 }
