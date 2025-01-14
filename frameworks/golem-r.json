@@ -8,5 +8,41 @@
     "code": ["'golem::add_module(name = \\\"module\\\")'"],
     "file": null
   },
-  "addins": []
+  "addins": [
+    {
+      "name": "Open start.R",
+      "code": ["dev/01_start.R"],
+      "directory": "goto"
+    },
+    {
+      "name": "Open dev.R",
+      "code": ["dev/02_dev.R"],
+      "directory": "goto"
+    },
+    {
+      "name": "Open deploy.R",
+      "code": ["dev/03_deploy.R"],
+      "directory": "goto"
+    },
+    {
+      "name": "Open run.R",
+      "code": ["dev/run_dev.R"],
+      "directory": "goto"
+    },
+    {
+      "name": "Open app_ui.R",
+      "code": ["R/app_ui.R"],
+      "directory": "goto"
+    },
+    {
+      "name": "Open app_server.R",
+      "code": ["R/app_server.R"],
+      "directory": "goto"
+    },
+    {
+      "name": "Open run_app.R",
+      "code": ["R/run_app.R"],
+      "directory": "goto"
+    }
+  ]
 }
