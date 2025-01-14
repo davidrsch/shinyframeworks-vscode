@@ -1,3 +1,6 @@
+const esbuild = require("esbuild");
+const fs = require("fs");
+
 const production = process.argv.includes("--production");
 const watch = process.argv.includes("--watch");
 const metafile = process.argv.includes("--metafile");
