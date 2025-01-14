@@ -1,0 +1,12 @@
+{
+  "name": "golem",
+  "language": "R",
+  "app": {
+    "code": ["'golem::create_golem(path, overwrite = TRUE)'"]
+  },
+  "module": {
+    "code": ["'golem::add_module(name = \\\"module\\\")'"],
+    "file": null
+  },
+  "addins": []
+}
