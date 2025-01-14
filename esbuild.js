@@ -62,10 +62,7 @@ const metafilePlugin = {
 async function main() {
   const buildmap = {
     extension: esbuild.context({
-      entryPoints: [
-        "src/extension.ts",
-        //"src/test/runTest.ts"
-      ],
+      entryPoints: ["src/extension.ts", "src/test/runTest.ts"],
       bundle: true,
       outdir: "out/",
       format: "cjs",
