@@ -19,13 +19,12 @@ export async function getSelectedPythonInterpreter(): Promise<string | false> {
   const unresolvedEnv = pythonAPI.environments.getActiveEnvironmentPath(
     vscode.window.activeTextEditor?.document.uri
   );
-  const resolvedEnv = await pythonAPI.environments.resolveEnvironment(
-    unresolvedEnv
-  );
+  const resolvedEnv =
+    await pythonAPI.environments.resolveEnvironment(unresolvedEnv);
   if (!resolvedEnv) {
     vscode.window.showErrorMessage(
       "Unable to find Python interpreter. " +
-      'Please use the "Python: Select Interpreter" command, and try again.'
+        'Please use the "Python: Select Interpreter" command, and try again.'
     );
     return false;
   }
@@ -49,7 +48,9 @@ async function getRPathFromPositron(bin: string): Promise<string> {
     return "";
   }
 
-  console.log(`[shinyframeworks] runtimeMetadata: ${JSON.stringify(runtimeMetadata)}`);
+  console.log(
+    `[shinyframeworks] runtimeMetadata: ${JSON.stringify(runtimeMetadata)}`
+  );
 
   const runtimePath = runtimeMetadata.runtimePath;
   if (!runtimePath) {
