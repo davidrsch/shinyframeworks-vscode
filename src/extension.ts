@@ -3,7 +3,7 @@ import { updateSettings } from './framework-settings';
 import { selectFramework, createApp, createModule, runAddin } from './explorer-actions';
 
 export function activate(context: vscode.ExtensionContext) {
-	
+
 	updateSettings();
 
 	context.subscriptions.push(vscode.workspace.onDidChangeConfiguration(event => {
@@ -12,7 +12,7 @@ export function activate(context: vscode.ExtensionContext) {
 		updateSettings();
 	  }
 	}));
-	
+
 	context.subscriptions.push(
 		vscode.commands.registerCommand('shinyframeworks.selectFramework', selectFramework),
 		vscode.commands.registerCommand('shinyframeworks.createModule', createModule),
