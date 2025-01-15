@@ -43,6 +43,11 @@
       "name": "Open run_app.R",
       "code": ["R/run_app.R"],
       "directory": "goto"
+    },
+    {
+      "name": "Run run_dev",
+      "code": ["'chooseCRANmirror(ind = 1);", "golem:::run_dev()'"],
+      "directory": "root"
     }
   ]
 }
