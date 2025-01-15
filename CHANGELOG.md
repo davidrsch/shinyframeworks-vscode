@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.0.3
+
+- Build system updates to make it closer to shiny-vscode
+- Adding Golem Framework
+
 ## 0.0.2
 
 - Downgrading vscode requirement to match shiny extension.
