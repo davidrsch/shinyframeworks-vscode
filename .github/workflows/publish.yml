@@ -1,12 +1,12 @@
 on:
   push:
     tags:
-      - "v[0-9]*"
+      - "v[0-9]*.[0-9]*.[0-9]*"
     branches:
       - "main"
   pull_request:
     branches:
-      - "main" 
+      - "main"
 
 name: Deploy Extension
 jobs:
@@ -25,12 +25,6 @@ jobs:
 
       - name: Build Extension
         run: npm run vsix
-
-      - name: Upload extension to Actions Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: shiny-vscode
-          path: "shinyframeworks*.vsix"
 
   publish-open-vsx:
     runs-on: ubuntu-latest
