@@ -373,9 +373,30 @@ export async function runAddin(uri: vscode.Uri) {
     command = selectedAddin.code;
   } else if (selectedAddin.directory === "root") {
     // Use the workspace root for uriToPass
-    uriToPass = uriToPass =
+    uriToPass =
       vscode.workspace.workspaceFolders?.[0]?.uri || vscode.Uri.file("");
     command = selectedAddin.code;
+  } else if (selectedAddin.directory === "goto") {
+    // Open the file specified in code in the editor
+    const filePath = path.join(
+      vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || "",
+      ...selectedAddin.code
+    );
+    const fileUri = vscode.Uri.file(filePath);
+    vscode.workspace
+      .openTextDocument(fileUri)
+      .then((doc) => {
+        return vscode.window.showTextDocument(doc, {
+          preview: false,
+        });
+      })
+      .then(undefined, (err) => {
+        console.error("Error opening document:", err);
+        vscode.window.showErrorMessage(
+          "Error opening document: " + err.message
+        );
+      });
+    return;
   } else {
     vscode.window.showErrorMessage(
       "Invalid directory setting in add-in configuration."
