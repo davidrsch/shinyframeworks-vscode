@@ -2,7 +2,7 @@ import { PythonExtension } from "@vscode/python-extension";
 import * as vscode from "vscode";
 import { join as path_join, dirname as path_dirname } from "path";
 import * as fs from "fs";
-import * as winreg from "winreg";
+import WinReg from "winreg";
 import { getPositronPreferredRuntime } from "./extension-api-utils/extensionHost";
 
 /**
@@ -114,13 +114,15 @@ async function getRPathFromWindowsReg(bin: string = "R"): Promise<string> {
   let rPath = "";
 
   try {
-    const key = new winreg({
-      hive: winreg.HKLM,
+    const key = new WinReg({
+      hive: WinReg.HKLM,
       key: "\\Software\\R-Core\\R",
     });
-    const item: winreg.RegistryItem = await new Promise((c, e) =>
-      key.get("InstallPath", (err, result) =>
-        err === null ? c(result) : e(err)
+    const item: WinReg.RegistryItem = await new Promise((c, e) =>
+      key.get(
+        "InstallPath",
+        (err: Error | null, result: WinReg.RegistryItem) =>
+          err === null ? c(result) : e(err)
       )
     );
     rPath = path_join(item.value, "bin", bin + ".exe");

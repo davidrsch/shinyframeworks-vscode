@@ -36,24 +36,22 @@ const metafilePlugin = {
     build.onEnd((result) => {
       if (result.metafile) {
         // For each output in the metafile
-        Object.entries(result.metafile.outputs).forEach(
-          ([outputPath, output]) => {
-            // Get the entry point for this output
-            const entryPoint = output.entryPoint;
-            if (entryPoint) {
-              // Extract filename without extension
-              const bundleName = entryPoint
-                .replace(/^.*[\\/]/, "")
-                .replace(/\.[^/.]+$/, "");
-              console.log(`meta.${bundleName}.json`);
+        Object.entries(result.metafile.outputs).forEach(([, output]) => {
+          // Get the entry point for this output
+          const entryPoint = output.entryPoint;
+          if (entryPoint) {
+            // Extract filename without extension
+            const bundleName = entryPoint
+              .replace(/^.*[\\/]/, "")
+              .replace(/\.[^/.]+$/, "");
+            console.log(`meta.${bundleName}.json`);
 
-              fs.writeFileSync(
-                `${bundleName}.esbuild-meta.json`,
-                JSON.stringify(result.metafile)
-              );
-            }
+            fs.writeFileSync(
+              `${bundleName}.esbuild-meta.json`,
+              JSON.stringify(result.metafile)
+            );
           }
-        );
+        });
       }
     });
   },
@@ -62,7 +60,12 @@ const metafilePlugin = {
 async function main() {
   const buildmap = {
     extension: esbuild.context({
-      entryPoints: ["src/extension.ts", "src/test/runTest.ts"],
+      entryPoints: [
+        "src/extension.ts",
+        "src/test/runTest.ts",
+        "src/test/suite/index.ts",
+        "src/test/suite/extension.test.ts",
+      ],
       bundle: true,
       outdir: "out/",
       format: "cjs",

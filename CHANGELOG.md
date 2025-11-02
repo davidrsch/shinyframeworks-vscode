@@ -1,5 +1,15 @@
 # Change Log
 
+## 0.0.4
+
+- Add status bar item showing current framework/language with quick switch
+- New command: `Open Framework JSON` to open the active framework preset
+- Implement real `teal` preset (scaffold app.R, addins to open/run app)
+- Fix addin "current" directory handling; expose helpers for testing
+- Add basic tests for framework discovery, path substitution, and addin modes
+- Improve GitHub Actions to publish from built VSIX and verify tag version
+- Manifest/Settings cleanup and README "How it works" section
+
 ## 0.0.3
 
 - Build system updates to make it closer to shiny-vscode

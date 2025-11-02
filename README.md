@@ -1,6 +1,6 @@
 # Shinyframeworks - VS Code Extension
 
-Shiny Frameworks is an extension designed to enhance your development workflow with [Shiny](https://shiny.posit.co), providing streamlined tools to simplify common tasks across a variety of Shiny frameworks. Currentlt suported frameworks are:
+Shiny Frameworks is an extension designed to enhance your development workflow with [Shiny](https://shiny.posit.co), providing streamlined tools to simplify common tasks across a variety of Shiny frameworks. Currently supported frameworks are:
 
 - R:
   1. shiny
@@ -13,6 +13,30 @@ Shiny Frameworks is an extension designed to enhance your development workflow w
 - Create App: Instantly generate a new app structure based on the selected framework, making it easier to start building your Shiny application without worrying about setup.
 - Create Module: Effortlessly create modular components within your Shiny app, using the best practices and conventions of your chosen framework.
 - Run Addins: Seamlessly access and execute addins specific to the selected framework, directly from VS Code, to streamline your development process.
+- Status bar: See the active framework/language and click to switch.
+- Open Framework JSON: Quickly open the current framework preset file in the editor.
+
+## How it works
+
+- Path token substitution
+
+  - In each framework JSON, code snippets may contain the token `path`.
+  - When you run Create App/Module/Addin from the Explorer context menu, `path` is replaced with the relative path to the clicked file or folder (from the workspace root), and wrapped in quotes.
+
+- Interpreter resolution
+
+  - R: Prefers Positron's runtime if available; otherwise uses the VS Code R extension setting `r.rpath`, then PATH lookup, then Windows registry.
+  - Python: Uses the active interpreter from the Python extension API.
+
+- Addin directory modes
+  - `root`: Run at the workspace root.
+  - `current`: Run in the clicked folder (or the parent folder when you clicked a file).
+  - `file`: Pass the clicked file path.
+  - `goto`: Open a target file in the editor instead of running code.
+
+### Teal preset
+
+The `teal` preset scaffolds a minimal `app.R` using the `teal` package. You can then run it with the "Run app (current dir)" addin from the folder where `app.R` was created.
 
 <!--## Requirements
 
