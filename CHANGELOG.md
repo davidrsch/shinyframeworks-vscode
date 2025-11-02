@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.6
+
+- CI: Fix publish jobs not finding VSIX artifact by downloading to workspace root
+
 ## 0.0.5
 
 - Documentation updates in README
