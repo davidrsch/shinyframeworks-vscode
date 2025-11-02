@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.7
+
+- CI: Deterministic VSIX name (shinyframeworks.vsix) and publish steps updated
+
 ## 0.0.6
 
 - CI: Fix publish jobs not finding VSIX artifact by downloading to workspace root
