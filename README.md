@@ -6,6 +6,7 @@ Shiny Frameworks is an extension designed to enhance your development workflow w
   1. shiny
   2. rhino
   3. golem
+  4. teal
 
 ## Features
 
@@ -57,6 +58,21 @@ Calling out known issues can help limit users opening duplicate issues against y
 
 ## Release Notes
 
+### 0.0.5
+
+- Documentation updates in README
+- Prepare release for CI tag-based publish
+
+### 0.0.4
+
+- Status bar item showing current framework/language with quick switch
+- New command: Open Framework JSON to open the active framework preset
+- Implement real teal preset (scaffold app.R, addins to open/run app)
+- Fix addin "current" directory handling; expose helpers for testing
+- Add basic tests for framework discovery, path substitution, and addin modes
+- Improve GitHub Actions to publish from built VSIX and verify tag version
+- Manifest/Settings cleanup and README "How it works" section
+
 ### 0.0.3
 
 Updating build system and adding **golem** framework
@@ -70,3 +86,20 @@ Fixing some bugs detected in initial release
 Initial release of shinyframeworks
 
 ---
+
+## Releasing (maintainers)
+
+This repo publishes on annotated tags only.
+
+1. Bump version in `package.json` and update `CHANGELOG.md`.
+2. Commit and push to `main`.
+3. Create and push an annotated tag matching the version with a `v` prefix, e.g. `v0.0.5`.
+
+- The CI verifies that the tag matches `package.json`.
+
+4. The workflow builds the VSIX once and publishes to both registries from the artifact.
+
+Requirements:
+
+- GitHub Actions secrets: `OPEN_VSX_TOKEN`, `VSCE_PAT`.
+- Workflow uses Node 20.18.1 and `@vscode/vsce` pinned locally.

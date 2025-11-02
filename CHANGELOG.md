@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.0.5
+
+- Documentation updates in README
+- Prepare release for CI tag-based publish (no functional code changes)
+
 ## 0.0.4
 
 - Add status bar item showing current framework/language with quick switch
