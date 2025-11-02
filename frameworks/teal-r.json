@@ -1,0 +1,44 @@
+{
+  "name": "teal",
+  "language": "R",
+  "app": {
+    "code": [
+      "'dir.create(path, recursive = TRUE, showWarnings = FALSE); writeLines(\"library(teal)\\napp <- init(\\n  data = teal_data(iris = iris),\\n  modules = list(\\n    module(\\n      label = \\\\\\\"iris histogram\\\\\\\",\\n      server = function(input, output, session, data) {\\n        updateSelectInput(session = session, inputId =  \\\\\\\"var\\\\\\\", choices = names(data()[[\\\\\\\"iris\\\\\\\"]])[1:4])\\n        output$hist <- renderPlot({ req(input$var); hist(x = data()[[\\\\\\\"iris\\\\\\\"]][[input$var]]) })\\n      },\\n      ui = function(id) {\\n        ns <- NS(id)\\n        list(\\n          selectInput(inputId = ns(\\\\\\\"var\\\\\\\"), label =  \\\\\\\"Column name\\\\\\\", choices = NULL),\\n          plotOutput(outputId = ns(\\\\\\\"hist\\\\\\\"))\\n        )\\n      }\\n    )\\n  )\\n)\\nshinyApp(app$ui, app$server)\", file.path(path, \\\"app.R\\\"))'"
+    ]
+  },
+  "module": {
+    "code": null,
+    "file": {
+      "filename": "module.R",
+      "content": [
+        "# Example teal module defined as a variable you can source and use in your app:",
+        "library(teal)",
+        "example_module <- module(",
+        "  label = 'example',",
+        "  server = function(input, output, session, data) {",
+        "    # TODO: implement server logic using data()",
+        "  },",
+        "  ui = function(id) {",
+        "    ns <- NS(id)",
+        "    list(",
+        "      selectInput(inputId = ns('var'), label = 'Column name', choices = NULL),",
+        "      plotOutput(outputId = ns('hist'))",
+        "    )",
+        "  }",
+        ")"
+      ]
+    }
+  },
+  "addins": [
+    {
+      "name": "Open app.R",
+      "code": ["app.R"],
+      "directory": "goto"
+    },
+    {
+      "name": "Run app (current dir)",
+      "code": ["'setwd(path);", "shiny::runApp()'"],
+      "directory": "current"
+    }
+  ]
+}

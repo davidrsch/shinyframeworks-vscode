@@ -188,7 +188,7 @@ async function runCommandInTerminal(
 }
 
 // Helper function to get command with relative path and set target directory
-async function prepareCommandWithRelativePath(
+export async function prepareCommandWithRelativePath(
   uri: vscode.Uri,
   commandLines: string[]
 ): Promise<{ command: string; targetPath: string } | null> {
@@ -368,8 +368,21 @@ export async function runAddin(uri: vscode.Uri) {
     uriToPass = vscode.Uri.file(uri.fsPath);
     command = selectedAddin.code;
   } else if (selectedAddin.directory === "current") {
-    // Use the path to the right-clicked folder (current) for uriToPass
-    uriToPass = vscode.Uri.file(path.dirname(uri.fsPath));
+    // Use the clicked folder if a folder, otherwise the folder containing the clicked file
+    try {
+      const stats = await fs.stat(uri.fsPath);
+      const dirPath = stats.isDirectory()
+        ? uri.fsPath
+        : path.dirname(uri.fsPath);
+      uriToPass = vscode.Uri.file(dirPath);
+    } catch (e) {
+      vscode.window.showErrorMessage(
+        `Unable to resolve directory for current item: ${
+          e instanceof Error ? e.message : e
+        }`
+      );
+      return;
+    }
     command = selectedAddin.code;
   } else if (selectedAddin.directory === "root") {
     // Use the workspace root for uriToPass
@@ -433,4 +446,25 @@ export async function runAddin(uri: vscode.Uri) {
 
   // Execute the command in the terminal
   await runCommandInTerminal(interpreterPath, result.command, workspaceRoot);
+}
+
+// Pure helper for testing addin directory mode resolution without VS Code/FS dependencies
+export function resolveAddinTargetPath(
+  directory: "file" | "current" | "root" | "goto",
+  clickedPath: string,
+  workspaceRoot: string,
+  isDirectory: boolean
+): string | null {
+  switch (directory) {
+    case "file":
+      return clickedPath;
+    case "current":
+      return isDirectory ? clickedPath : path.dirname(clickedPath);
+    case "root":
+      return workspaceRoot;
+    case "goto":
+      return null; // handled by caller to open a file
+    default:
+      return null;
+  }
 }

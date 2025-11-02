@@ -15,7 +15,13 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onCommand:shinyframeworks.selectFramework",
+    "onCommand:shinyframeworks.createApp",
+    "onCommand:shinyframeworks.createModule",
+    "onCommand:shinyframeworks.Addins",
+    "onCommand:shinyframeworks.openFrameworkConfig"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
@@ -34,6 +40,10 @@
       {
         "command": "shinyframeworks.selectFramework",
         "title": "Select Framework"
+      },
+      {
+        "command": "shinyframeworks.openFrameworkConfig",
+        "title": "Open Framework JSON"
       }
     ],
     "menus": {
@@ -74,14 +84,32 @@
         "shinyframeworks.framework.defaultLanguage": {
           "type": "string",
           "default": "r",
-          "string": "r",
-          "description": "The allowed languages are: python and r. The selected language:"
+          "enum": [
+            "r",
+            "python"
+          ],
+          "enumDescriptions": [
+            "Use R for Shiny frameworks",
+            "Use Python for Shiny frameworks"
+          ],
+          "description": "Default language for Shiny frameworks in this workspace."
         },
         "shinyframeworks.framework.defaultFramework": {
           "type": "string",
           "default": "shiny",
-          "string": "shiny",
-          "description": "The allowed frameworks are: shiny. The selected framework:"
+          "enum": [
+            "shiny",
+            "rhino",
+            "golem",
+            "teal"
+          ],
+          "enumDescriptions": [
+            "Base Shiny app",
+            "Appsilon's Rhino framework",
+            "Golem framework",
+            "teal framework"
+          ],
+          "description": "Default Shiny framework for this workspace."
         }
       }
     }
@@ -93,7 +121,7 @@
     "watch": "npm-run-all -p watch:*",
     "watch:esbuild": "node esbuild.js --watch",
     "watch:tsc": "tsc --noEmit --watch",
-    "pretest": "npm run compile && nnpm run lint",
+    "pretest": "npm run compile && npm run lint",
     "check-types": "tsc --noEmit",
     "lint": "eslint src",
     "test": "node ./out/test/runTest.js",
@@ -120,9 +148,7 @@
   },
   "extensionDependencies": [],
   "dependencies": {
-    "@types/winreg": "^1.2.36",
     "@vscode/python-extension": "^1.0.5",
-    "fs": "^0.0.1-security",
     "istextorbinary": "^9.5.0",
     "lz-string": "^1.5.0",
     "winreg": "^1.2.5"

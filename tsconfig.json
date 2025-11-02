@@ -7,7 +7,9 @@
 		"rootDir": "src",
 		"strict": true,
 		"noImplicitReturns": true,
-		"noFallthroughCasesInSwitch": true
+		"noFallthroughCasesInSwitch": true,
+		"skipLibCheck": true,
+		"esModuleInterop": true
 		// "noUnusedParameters": true,  /* Report errors on unused parameters. */
 	},
 	"exclude": []
